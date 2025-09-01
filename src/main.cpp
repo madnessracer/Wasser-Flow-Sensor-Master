@@ -1,4 +1,7 @@
 
+#// Copyright (c) 2025 madnessracer
+#// MIT License
+#
 #include <Arduino.h>
 #include "flowmeter.h"
 

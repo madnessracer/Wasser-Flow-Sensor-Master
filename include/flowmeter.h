@@ -1,4 +1,7 @@
 
+#// Copyright (c) 2025 madnessracer
+#// MIT License
+#
 #pragma once
 #include <Arduino.h>
 #include <Adafruit_FRAM_I2C.h>
