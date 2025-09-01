@@ -6,10 +6,12 @@ Dieses Projekt misst die Wassermenge und die Durchflussrate (Liter pro Minute) m
 Die gemessenen Werte werden dauerhaft in einem externen FRAM-Modul gespeichert und bleiben auch nach einem Stromausfall erhalten.
 
 
+
 ## Features
 
 - Messung der aktuellen Durchflussrate (L/min) für bis zu 4 Sensoren
 - Berechnung der Gesamtmenge (Liter) je Sensor
+- Dauerhafte Speicherung der Gesamtmengen im externen FRAM-Modul (auch nach Stromausfall)
 - Ausgabe der Werte für alle Sensoren über die serielle Schnittstelle
 - Hardware-Timer für präzise, unterbrechungsfreie Messung
 
