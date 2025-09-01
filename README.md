@@ -15,6 +15,30 @@ Dieses Projekt misst die Wassermenge und die Durchflussrate (Liter pro Minute) m
 - YF-S201 Wasser-Flow-Sensor
 - Anschluss: Signal-Pin des Sensors an GPIO2 (D2) des ESP32
 
+### Anschlussplan YF-S201 an D1 Mini ESP32
+
+| YF-S201 | ESP32 (D1 Mini) |
+|---------|-----------------|
+| Rot     | 5V              |
+| Schwarz | GND             |
+| Gelb    | D2 (GPIO2)      |
+
+**Hinweis:**
+- Der Signal-Pin (Gelb) wird mit D2 (GPIO2) des ESP32 verbunden.
+- VCC des Sensors benötigt 5V. Die meisten D1 Mini ESP32 Boards haben einen 5V Pin.
+- GND des Sensors kommt an GND des ESP32.
+
+#### ASCII-Schaltbild
+
+```
+YF-S201         D1 Mini ESP32
+  +-----+         +-----------+
+  | Rot |---------| 5V        |
+  | Gelb|---------| D2 (GPIO2)|
+  |Schwarz|------| GND        |
+  +-----+         +-----------+
+```
+
 ## Installation
 
 1. PlatformIO installieren
