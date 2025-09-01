@@ -17,11 +17,12 @@ Die gemessenen Werte werden dauerhaft in einem externen FRAM-Modul gespeichert u
 
 
 
+
 ## Hardware
 
 - D1 Mini ESP32
 - Bis zu 4x YF-S201 Wasser-Flow-Sensor
-- Externes FRAM-Modul (z.B. MB85RC256V) zur dauerhaften Speicherung der Gesamtmengen
+- Externes FRAM-Modul MB85RC256V (I2C) zur dauerhaften Speicherung der Gesamtmengen
 - Anschluss: Signal-Pins der Sensoren an GPIO2 (D2), GPIO3 (D3), GPIO4 (D4), GPIO5 (D5) des ESP32
 
 
