@@ -1,7 +1,9 @@
 
 # 4-fach Wasser Flow Sensoren Master
 
+
 Dieses Projekt misst die Wassermenge und die Durchflussrate (Liter pro Minute) mit bis zu vier YF-S201 Wasser-Flow-Sensoren und einem D1 Mini ESP32.
+Die gemessenen Werte werden dauerhaft in einem externen FRAM-Modul gespeichert und bleiben auch nach einem Stromausfall erhalten.
 
 
 ## Features
@@ -30,12 +32,15 @@ Dieses Projekt misst die Wassermenge und die Durchflussrate (Liter pro Minute) m
 | Gelb    | D4 (GPIO4)      |
 | Gelb    | D5 (GPIO5)      |
 
+
 **Hinweis:**
 - Jeder Sensor bekommt einen eigenen Signal-Pin am ESP32 (D2, D3, D4, D5).
 - VCC des Sensors benötigt 5V. Die meisten D1 Mini ESP32 Boards haben einen 5V Pin.
 - GND des Sensors kommt an GND des ESP32.
+- Die Gesamtmenge jedes Sensors wird im externen FRAM-Modul (I2C, z.B. MB85RC256V) gespeichert und bleibt auch nach Stromausfall erhalten.
+- Die gesamte Flowmeter-Logik ist in einer eigenen Klasse gekapselt (`flowmeter.h`).
 
-#### ASCII-Schaltbild (Beispiel für 2 Sensoren, für 4 Sensoren entsprechend erweitern)
+#### ASCII-Schaltbild (4 Sensoren, D1 Mini ESP32, FRAM)
 
 ```
 YF-S201_1         D1 Mini ESP32
@@ -51,6 +56,28 @@ YF-S201_2         D1 Mini ESP32
   | Gelb|---------| D3 (GPIO3)|
   |Schwarz|------| GND        |
   +-----+         +-----------+
+
+YF-S201_3         D1 Mini ESP32
+  +-----+         +-----------+
+  | Rot |---------| 5V        |
+  | Gelb|---------| D4 (GPIO4)|
+  |Schwarz|------| GND        |
+  +-----+         +-----------+
+
+YF-S201_4         D1 Mini ESP32
+  +-----+         +-----------+
+  | Rot |---------| 5V        |
+  | Gelb|---------| D5 (GPIO5)|
+  |Schwarz|------| GND        |
+  +-----+         +-----------+
+
+FRAM-Modul (z.B. MB85RC256V)
+  +-----+         +-----------+
+  | VCC |---------| 3.3V/5V   |
+  | GND |---------| GND       |
+  | SCL |---------| SCL (D1)  |
+  | SDA |---------| SDA (D2)  |
+  +-----+         +-----------+
 ```
 
 ## Installation
@@ -63,11 +90,13 @@ YF-S201_2         D1 Mini ESP32
 3. Abhängigkeiten installieren (falls benötigt)
 4. Board auswählen und Code flashen
 
+
 ## Code-Überblick
 
 - Die Impulse des Sensors werden per Interrupt gezählt.
 - Ein Hardware-Timer berechnet jede Sekunde die Durchflussrate und die Gesamtmenge.
 - Die aktuellen Werte werden in Variablen gespeichert und seriell ausgegeben.
+- Die Gesamtmengen jedes Sensors werden dauerhaft im externen FRAM-Modul gespeichert und beim Start automatisch geladen.
 
 
 ## Beispiel-Ausgabe
@@ -80,10 +109,13 @@ Sensor 4: Durchflussrate: 0.00 L/min, Gesamt: 0.00 L
 ----------------------
 ```
 
-## Anpassungen
+
+## Anpassungen & Hinweise
 
 - Für andere Sensoren kann der Wert `PULSES_PER_LITER` angepasst werden.
 - Die Ausgabe kann beliebig erweitert werden (z.B. Webserver, Display).
+- Die Flowmeter-Logik ist modular in einer eigenen Klasse ausgelagert (`include/flowmeter.h`).
+- Die Werte werden sicher im FRAM gespeichert und beim Start automatisch geladen.
 
 ## Lizenz
 
